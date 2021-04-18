@@ -1,0 +1,32 @@
+type Query {
+    parents: [Parent]
+    parent(id: ID!): Parent
+    children: [Child]
+    child(id: ID!): Child
+}
+
+type Parent {
+    _id: ID!
+    name: String!
+    children: [Child!]
+}
+
+interface Child {
+    _id: ID!
+    name: String!
+    parent: Parent!
+}
+
+type A implements Child {
+    _id: ID!
+    name: String!
+    parent: Parent!
+    foo: String!
+}
+
+type B implements Child {
+    _id: ID!
+    name: String!
+    parent: Parent!
+    bar: String!
+}
