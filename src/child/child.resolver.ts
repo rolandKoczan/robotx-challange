@@ -1,5 +1,5 @@
 import { Logger } from "@nestjs/common";
-import { Resolver, Query, Args, ResolveField } from "@nestjs/graphql"
+import { Resolver, Query, Args } from "@nestjs/graphql"
 import { Child } from "src/graphql"
 import { ChildService } from "./child.service"
 
