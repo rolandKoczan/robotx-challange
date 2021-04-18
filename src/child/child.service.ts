@@ -13,6 +13,10 @@ export class ChildService {
         { _id: "6", name: "Child 6", parentId: "3", bar: "foo" },
     ]
 
+    findAll(){
+        return this.children
+    }
+
     findAllByParentId(_id: number): Array<any> {
         const result = this.children.filter(
             (child) => child.parentId === _id.toString()
