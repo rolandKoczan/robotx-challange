@@ -1,16 +1,28 @@
-import { Resolver, Query, Args } from "@nestjs/graphql"
-import { Parent } from "../graphql"
+import { Logger } from "@nestjs/common"
+import { Resolver, Query, Args, ResolveProperty } from "@nestjs/graphql"
+import { ChildService } from "src/child/child.service"
+import { Parent as ParentObject } from "../graphql"
 import { ParentService } from "./parent.service"
 
-@Resolver()
+@Resolver("Parent")
 export class ParentResolver {
-    constructor(private readonly parentService: ParentService) {}
+    private readonly logger = new Logger(ParentResolver.name)
+    constructor(
+        private readonly parentService: ParentService,
+        private readonly childService: ChildService
+    ) {}
 
     @Query("parent")
     async findOneById(
         @Args("id")
         id: string
-    ): Promise<Parent> {
+    ): Promise<ParentObject> {
+        this.logger.debug("Query")
         return this.parentService.findOneById(id)
     }
+    // async children(@Parent() parent) {
+    //     const { _id } = parent
+    //     this.logger.debug(_id)
+    //     return this.childService.findAllByParentId(_id)
+    // }
 }
